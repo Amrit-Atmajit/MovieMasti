@@ -17,5 +17,23 @@ eureka:
   instance:
     preferIpAddress: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: "gatewayserver"
+    description: "Amrit MovieMasti Gateway Server Application"
+    version: "1.0.0"
+
 jwt:
   secret: 
