@@ -1,6 +1,4 @@
-package com.moviemasti.gateway
-
--masti.gateway;
+package com.moviemasti.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
