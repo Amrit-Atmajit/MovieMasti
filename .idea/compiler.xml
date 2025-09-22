@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="movie-masti-movie-service" />
+        <module name="movie-masti-showtime-service" />
+        <module name="showtime-service" />
+        <module name="movie-masti-user-service" />
+        <module name="movie-masti-api-gateway" />
+        <module name="user-service" />
+        <module name="movie-masti-booking-service" />
+        <module name="movie-masti-eureka-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="movie-masti-gateway" target="17" />
+      <module name="movie-masti-showtime-service" target="17" />
+      <module name="movie-masti-user-service" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="movie-masti-api-gateway" options="-parameters" />
+      <module name="movie-masti-booking-service" options="-parameters" />
+      <module name="movie-masti-eureka-server" options="-parameters" />
+      <module name="movie-masti-gateway" options="-parameters" />
+      <module name="movie-masti-movie-service" options="-parameters" />
+      <module name="movie-masti-showtime-service" options="-parameters" />
+      <module name="movie-masti-user-service" options="-parameters" />
+      <module name="showtime-service" options="-parameters" />
+      <module name="user-service" options="-parameters" />
+    </option>
+  </component>
+</project>
