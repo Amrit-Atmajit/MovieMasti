@@ -57,7 +57,7 @@ public class JwtUtil implements Serializable {
 
 		claims.put("role", role);
 		claims.put("date", LocalDateTime.now().toString());
-		claims.put("message", "some other message");
+		claims.put("message", "Amrit MovieMasti User");
 				
 		return doGenerateToken(claims, userName);
 	}

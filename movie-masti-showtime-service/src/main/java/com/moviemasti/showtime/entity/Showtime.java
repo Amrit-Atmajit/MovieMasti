@@ -7,8 +7,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Showtime {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,29 +30,5 @@ public class Showtime {
 	
 	@Column(name = "available_seats", nullable = false)
 	private Integer availableSeats;
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Long getMovieId() {
-		return movieId;
-	}
-	public void setMovieId(Long movieId) {
-		this.movieId = movieId;
-	}
-	public LocalDateTime getShowTime() {
-		return showTime;
-	}
-	public void setShowTime(LocalDateTime showTime) {
-		this.showTime = showTime;
-	}
-	public Integer getAvailableSeats() {
-		return availableSeats;
-	}
-	public void setAvailableSeats(Integer availableSeats) {
-		this.availableSeats = availableSeats;
-	}
+
 }

@@ -1,5 +1,12 @@
 package com.moviemasti.showtime.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BookingDTO {
 
     private Long id;
@@ -7,35 +14,4 @@ public class BookingDTO {
     private Long showtimeId;
     private Integer seatsBooked;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getShowtimeId() {
-        return showtimeId;
-    }
-
-    public void setShowtimeId(Long showtimeId) {
-        this.showtimeId = showtimeId;
-    }
-
-	public Integer getSeatsBooked() {
-		return seatsBooked;
-	}
-
-	public void setSeatsBooked(Integer seatsBooked) {
-		this.seatsBooked = seatsBooked;
-	}
 }

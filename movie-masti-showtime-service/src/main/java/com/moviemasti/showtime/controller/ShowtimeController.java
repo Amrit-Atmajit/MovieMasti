@@ -24,6 +24,11 @@ public class ShowtimeController {
 		return showtimeService.getAllShowtimes();
 	}
 
+    /**
+     * This method returns a ShowtimeDTO object that includes the showtime details and its associated bookings.
+     * @param id The ID of the showtime to retrieve.
+     * @return A ShowtimeDTO object containing the showtime details and bookings.
+     */
     @GetMapping("/{id}")
     public ShowtimeDTO getShowtimeWithBookings(@PathVariable Long id) {
         return showtimeService.getShowtimeWithBookings(id);
