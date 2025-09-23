@@ -11,13 +11,37 @@ public class GatewayConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("user-service", r -> r.path("/api/user/**")
+                // Route for /api/user/**
+                .route("user-service-api", r -> r.path("/api/user/**")
+                        .filters(f -> f.rewritePath("/api/(?<segment>.*)", "/${segment}"))
                         .uri("lb://user-service"))
-                .route("movie-service", r -> r.path("/api/movies/**")
+                // Route for /user-service/api/**
+                .route("user-service-prefixed", r -> r.path("/user-service/api/**")
+                        .filters(f -> f.rewritePath("/user-service/(?<segment>.*)", "/${segment}"))
+                        .uri("lb://user-service"))
+                
+                // Movie service routes
+                .route("movie-service-api", r -> r.path("/api/movies/**")
+                        .filters(f -> f.rewritePath("/api/(?<segment>.*)", "/${segment}"))
                         .uri("lb://movie-service"))
-                .route("showtime-service", r -> r.path("/api/showtimes/**")
+                .route("movie-service-prefixed", r -> r.path("/movie-service/api/**")
+                        .filters(f -> f.rewritePath("/movie-service/(?<segment>.*)", "/${segment}"))
+                        .uri("lb://movie-service"))
+                
+                // Showtime service routes
+                .route("showtime-service-api", r -> r.path("/api/showtimes/**")
+                        .filters(f -> f.rewritePath("/api/(?<segment>.*)", "/${segment}"))
                         .uri("lb://showtime-service"))
-                .route("booking-service", r -> r.path("/api/bookings/**")
+                .route("showtime-service-prefixed", r -> r.path("/showtime-service/api/**")
+                        .filters(f -> f.rewritePath("/showtime-service/(?<segment>.*)", "/${segment}"))
+                        .uri("lb://showtime-service"))
+                
+                // Booking service routes
+                .route("booking-service-api", r -> r.path("/api/bookings/**")
+                        .filters(f -> f.rewritePath("/api/(?<segment>.*)", "/${segment}"))
+                        .uri("lb://booking-service"))
+                .route("booking-service-prefixed", r -> r.path("/booking-service/api/**")
+                        .filters(f -> f.rewritePath("/booking-service/(?<segment>.*)", "/${segment}"))
                         .uri("lb://booking-service"))
                 .build();
     }
