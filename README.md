@@ -1,8 +1,8 @@
-## 📽️ Movie Ticketing Microservice
+## Movie Ticketing Microservice
 
 This project is a microservice-based architecture for a movie ticket booking application. It provides secure and modular services to manage movies, showtimes, and ticket bookings. Each service is designed for scalability and flexibility.
 
-### 🪶 Features
+### Features
 
 - JWT authentication for user verification.
 - Role-based access control for managing `ADMIN` and `USER` permissions.
@@ -10,7 +10,7 @@ This project is a microservice-based architecture for a movie ticket booking app
 - Services are loosely coupled and scalable independently.
 - Centralized exception handling across all services.
 
-### 🧑‍💻 Technology Used
+### Technology Used
 
 - Java 17
 - Spring Boot
