@@ -6,6 +6,52 @@ spring:
       discovery:
         locator:
           enabled: true  # This enables discovery client integration
+          lower-case-service-id: true
+      routes:
+        # Swagger UI routes for each service
+        - id: movie-service-swagger
+          uri: lb://movie-service
+          predicates:
+            - Path=/movie-service/v3/api-docs/**, /movie-service/swagger-ui/**
+          filters:
+            - RewritePath=/movie-service/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: movie-service
+                fallbackUri: forward:/fallback/movie-service
+
+        - id: booking-service-swagger
+          uri: lb://booking-service
+          predicates:
+            - Path=/booking-service/v3/api-docs/**, /booking-service/swagger-ui/**
+          filters:
+            - RewritePath=/booking-service/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: booking-service
+                fallbackUri: forward:/fallback/booking-service
+
+        - id: showtime-service-swagger
+          uri: lb://showtime-service
+          predicates:
+            - Path=/showtime-service/v3/api-docs/**, /showtime-service/swagger-ui/**
+          filters:
+            - RewritePath=/showtime-service/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: showtime-service
+                fallbackUri: forward:/fallback/showtime-service
+
+        - id: user-service-swagger
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/v3/api-docs/**, /user-service/swagger-ui/**
+          filters:
+            - RewritePath=/user-service/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: user-service
+                fallbackUri: forward:/fallback/user-service
 
 server:
   port: 9090

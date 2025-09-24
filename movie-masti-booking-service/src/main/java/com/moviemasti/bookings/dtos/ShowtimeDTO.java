@@ -1,4 +1,4 @@
-package com.moviemasti.showtime.dtos;
+package com.moviemasti.bookings.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

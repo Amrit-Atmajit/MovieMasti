@@ -48,6 +48,12 @@
 			<optional>true</optional>
 		</dependency>
 		
+		<!-- Spring Cloud Circuit Breaker with Resilience4J -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
+		</dependency>
+		
 		<!-- Configuration Processor for @ConfigurationProperties -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

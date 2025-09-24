@@ -19,48 +19,61 @@ import com.user_service.utils.JwtRequestFilter;
 
 @Configuration
 public class WebSecurityConfig {
-	@Autowired
-	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-	
-	@Autowired
-	private UserDetailsService jwtUserDetailsService;
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-	@Autowired
-	private JwtRequestFilter jwtRequestFilter;
-	
-	@Bean
-	public PasswordEncoder passwordEncoder()
-	{
-	    return new BCryptPasswordEncoder();
-	}
-	
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(jwtUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-	}
+    @Autowired
+    private UserDetailsService jwtUserDetailsService;
 
-	@Bean
-	public AuthenticationManager authenticationManagerBean(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-		return authenticationConfiguration.getAuthenticationManager();
-	}
-	
-	@Bean
-	protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
-		// We don't need CSRF for this example
-		httpSecurity.csrf(csrf -> csrf.disable())
-		// dont authenticate this particular request
-		.authorizeHttpRequests(auth -> auth.requestMatchers("/api/user/register", "/api/user/login").permitAll()
-				// all other requests need to be authenticated
-				.anyRequest().authenticated())
-		// make sure we use stateless session; session won't be
-		// used to store user's state.
-		.logout((logout) -> logout.logoutUrl("/api/user/logout"))
-		.exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
-		.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
 
-		// Add a filter to validate the tokens with every request
-		.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-		
-		return httpSecurity.build();
-	}
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(jwtUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManagerBean(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
+        // We don't need CSRF for this example
+        httpSecurity.csrf(csrf -> csrf.disable())
+                // dont authenticate these particular requests
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/api/user/register",
+                                "/api/user/login",
+                                // Allow Swagger UI and API docs
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**",
+                                "/swagger-ui.html",
+                                // Allow Actuator endpoints
+                                "/actuator/health",
+                                "/actuator/info",
+                                "/actuator/**"
+                        ).permitAll()
+                        // all other requests need to be authenticated
+                        .anyRequest().authenticated())
+                // make sure we use stateless session; session won't be
+                // used to store user's state.
+                .logout((logout) -> logout.logoutUrl("/api/user/logout"))
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                // Add a filter to validate the tokens with every request
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return httpSecurity.build();
+    }
 }

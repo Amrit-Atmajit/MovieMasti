@@ -20,7 +20,7 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtil implements Serializable {
 	private static final long serialVersionUID = -2550185165626007488L;
-	public static final long TOKEN_VALIDITY = 12 * 60 * 60 * 1000;
+	public static final long TOKEN_VALIDITY = 26 * 60 * 60 * 1000;
 
 	@Value("${jwt.secret}")
 	private String secret;
